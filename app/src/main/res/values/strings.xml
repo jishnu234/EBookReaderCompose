@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ReaderApplication</string>
+    <string name="create_acc_text">Please Enter a valid email and password that is at least 6 characters</string>
+</resources>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "142493767456",
+    "project_id": "composereaderapp",
+    "storage_bucket": "composereaderapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142493767456:android:6f5887150a7a8c6ed06945",
+        "android_client_info": {
+          "package_name": "com.example.readerapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142493767456-g138mrbsqpv9utnf832aenrg01s9fn71.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.readerapplication",
+            "certificate_hash": "1ed060f93f743afedd25eeadc23440162bc3c9b9"
+          }
+        },
+        {
+          "client_id": "142493767456-48ndfnsb02j20p8ruc1bgvk5vos9cscd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARaVDUD-u6VjxopNippT5Tt_U9T3CyGqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142493767456-48ndfnsb02j20p8ruc1bgvk5vos9cscd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
