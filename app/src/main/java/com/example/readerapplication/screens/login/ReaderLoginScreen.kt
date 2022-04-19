@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -23,21 +23,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.readerapplication.R
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.readerapplication.R
 import com.example.readerapplication.components.EmailInput
 import com.example.readerapplication.components.PasswordInput
 import com.example.readerapplication.components.ReaderLogo
+import com.example.readerapplication.components.SubmitButton
+import com.example.readerapplication.navigation.ReaderBookScreens
 
 
 @ExperimentalComposeUiApi
-@Preview
 @Composable
-fun ReaderLoginScreen(navController: NavController = rememberNavController()) {
+fun ReaderLoginScreen(
+    navController: NavController,
+    viewModel: LoginViewModel = viewModel()
+) {
 
     val showLoginForm = rememberSaveable {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
     Surface(
         modifier = Modifier
@@ -55,9 +59,16 @@ fun ReaderLoginScreen(navController: NavController = rememberNavController()) {
             )
             if (showLoginForm.value) {
                 UserForm(loading = false, isCreateAccount = false)
-                { email, password -> }
-            } else UserForm(loading = false, isCreateAccount = true)
-            { email, password -> }
+                { email,password ->
+                    viewModel.signInWithEmailAndPassword( email, password ){
+                        navController.navigate(ReaderBookScreens.HomeScreen.name)
+                    }
+                }
+            }
+            else UserForm(loading = false, isCreateAccount = true)
+            { email, password ->
+                //Todo: Create Account
+            }
             Spacer(modifier = Modifier.height(12.dp))
             Row(
                 modifier = Modifier
@@ -93,10 +104,10 @@ fun UserForm(
     }
 ) {
 
-    var emailState = rememberSaveable {
+    val emailState = rememberSaveable {
         mutableStateOf("")
     }
-    var passwordState = rememberSaveable {
+    val passwordState = rememberSaveable {
         mutableStateOf("")
     }
     val valid = rememberSaveable(emailState.value, passwordState.value) {
@@ -157,27 +168,6 @@ fun UserForm(
     }
 }
 
-@Composable
-fun SubmitButton(
-    modifier: Modifier,
-    textId: String,
-    loading: Boolean,
-    validInputs: Boolean,
-    onClick: () -> Unit
-) {
 
-    Button(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp),
-        shape = CircleShape,
-        enabled = !loading && validInputs,
-        onClick = onClick
-    ) {
-
-        if (loading) CircularProgressIndicator(modifier = Modifier.size(25.dp))
-        else Text(text = textId, modifier = Modifier.padding(5.dp))
-    }
-}
 
 

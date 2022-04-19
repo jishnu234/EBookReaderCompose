@@ -3,12 +3,11 @@ package com.example.readerapplication.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -145,7 +144,28 @@ fun PasswordInput(
 }
 
 
+@Composable
+fun SubmitButton(
+    modifier: Modifier,
+    textId: String,
+    loading: Boolean,
+    validInputs: Boolean,
+    onClick: () -> Unit
+) {
 
+    Button(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp),
+        shape = CircleShape,
+        enabled = !loading && validInputs,
+        onClick = onClick
+    ) {
+
+        if (loading) CircularProgressIndicator(modifier = Modifier.size(25.dp))
+        else Text(text = textId, modifier = Modifier.padding(5.dp))
+    }
+}
 
 
 
