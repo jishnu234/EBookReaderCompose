@@ -67,7 +67,9 @@ fun ReaderLoginScreen(
             }
             else UserForm(loading = false, isCreateAccount = true)
             { email, password ->
-                //Todo: Create Account
+                viewModel.createAccountWithEmailAndPassword(email, password){
+                    navController.navigate(ReaderBookScreens.HomeScreen.name)
+                }
             }
             Spacer(modifier = Modifier.height(12.dp))
             Row(

@@ -24,6 +24,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.readerapplication.components.ReaderLogo
 import com.example.readerapplication.navigation.ReaderBookScreens
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 
 
@@ -34,6 +37,7 @@ fun ReaderSplashScreen(navController: NavController = rememberNavController()) {
     val scale = remember {
         Animatable(0f)
     }
+
     LaunchedEffect(key1 = true){
         scale.animateTo(
             1f,
@@ -43,8 +47,12 @@ fun ReaderSplashScreen(navController: NavController = rememberNavController()) {
                     OvershootInterpolator(10f)
                         .getInterpolation(it)
                 }))
-        delay(2000L)
-        navController.navigate(ReaderBookScreens.LoginScreen.name)
+        delay(1000L)
+
+        if (!FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty())
+            navController.navigate(ReaderBookScreens.HomeScreen.name)
+        else
+            navController.navigate(ReaderBookScreens.LoginScreen.name)
     }
 
     Column(
