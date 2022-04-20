@@ -17,7 +17,6 @@ class LoginViewModel : ViewModel() {
 
     private val loadingState = MutableStateFlow(LoadingState.IDLE)
     private val auth: FirebaseAuth = Firebase.auth
-
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: LiveData<Boolean> = _loading
 
@@ -37,6 +36,7 @@ class LoginViewModel : ViewModel() {
                 Log.d("FB", "signInWithEmailAndPassword: ${exception.message}")
             }
         }
+
 
     fun createAccountWithEmailAndPassword(email: String, password: String, onDone: () -> Unit) {
 
@@ -61,8 +61,8 @@ class LoginViewModel : ViewModel() {
 
     }
 
-    private fun createUser(displayName: String?) {
 
+    private fun createUser(displayName: String?) {
         val uid = auth.currentUser?.uid
 
         val user = MUser(
